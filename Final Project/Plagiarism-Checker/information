@@ -1,0 +1,26 @@
+
+
+Plagiarsim checker using cosine algorithm
+
+
+
+
+- Install the requirements using `pip install -r requirements.txt`
+- Run server `python3 manage.py runserver`
+
+
+-`npm install typed.js` in terminal
+
+
+-`python3 manage.py createsuperuser`
+`http://127.0.0.1:8000/admin/auth/user/` or 
+`http://127.0.0.1:8000/admin/login/`
+
+<table>
+  <tr>
+    <td>Plagiarsim Checker</td>
+  </tr>
+  <tr>
+   
+  </tr>
+ </table>

@@ -1,0 +1,129 @@
+body {
+  overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: scroll;
+  font-family:  "Roboto Mono", monospace;
+ 
+  background-image: radial-gradient(
+    circle,
+    #7abecc,
+    #000000 
+  ); 
+}
+
+.navbar-brand {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 40px;
+  margin-right: 40px;
+
+  font-weight: bold;
+  display: block;
+
+  color: #e1e0e0;
+}
+.navbar-nav a:hover {
+  color: #bfd2d0;
+  opacity: 0.5;
+}
+
+.nav-two {
+  margin-left: 18px;
+}
+
+.navbar-nav {
+  font-size: 20px;
+  color: antiquewhite;
+}
+
+.navbar-nav li :hover {
+  color: #bfd2d0;
+  opacity: 0.5;
+}
+
+.content-1 {
+  margin-top: 10px;
+  background-color: #7abecc00;
+}
+
+h1 {
+  text-align: center;
+}
+
+.text-content {
+  text-align: center;
+  margin: auto;
+  align-items: center;
+ 
+}
+.new {
+  margin-top: 200px;
+}
+
+.tab-content-2 {
+  height: 450px;
+ 
+  border-radius: 9px;
+  padding: 10px;
+  margin: auto;
+ 
+  margin-bottom: 50px;
+  background-color: #bfd2d0;
+}
+
+form {
+  padding-top: 20px;
+}
+
+textarea {
+  width: 90%;
+  height: 170px;
+}
+
+#fileupload {
+  margin-bottom: 5px;
+}
+
+#submit-button-1 {
+  background-color: #000000;
+  color: whitesmoke;
+  font-size: large;
+  border-radius: 12px;
+  margin-top: 40px;
+}
+
+#submit-button-2 {
+  background-color: #000000;
+  color: white;
+  font-size: large;
+  border-radius: 12px;
+  margin-top: 325px;
+}
+
+#output {
+  margin-bottom: 200px;
+  height: 100px;
+}
+
+#file-input-dc-2 {
+  color: black;
+}
+
+.button-align {
+  text-align: center;
+  align-items: center;
+  margin-left: 100px;
+}
+
+.output-per {
+  font-size: 30px;
+  color: #264653;
+
+  width: 155px;
+  height: 155px;
+  border: 5px solid #000000;
+  border-radius: 50%;
+  background-color: #bfd2d0;
+  display: flex;
+  align-items: center; /* Vertical center alignment */
+  justify-content: center;
+}

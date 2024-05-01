@@ -1,0 +1,277 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Plagiarism Checker | Compare Document</title>
+    <link rel="icon" href="{% static 'pc/logomain.jpeg' %}" />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+    />
+    <!-- Google Fonts -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+    />
+    <!-- Bootstrap core CSS -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Material Design Bootstrap -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'pc/stylesDocCheck.css' %}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <style>
+      .navbar-brand {
+        font-family: Georgia, "Times New Roman", Times, serif !important;
+        font-weight: 500;
+      }
+    </style>
+  </head>
+
+  <body>
+   
+
+    <nav
+      class="navbar navbar-expand-lg navbar-dark"
+      style="background-color: #000000"
+    >
+      <a class="navbar-brand" href="{% url 'plagiarism-check-mainpage' %}">
+        <img
+          src="{% static 'pc/logomain.jpeg' %}"
+          alt="Description of the image"
+          style="display: flex; width: 250px; height: 150px"
+        />
+      </a>
+      <button
+        class="navbar-toggler"
+        style="text-decoration: none"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item nav-one">
+            <a class="nav-link" href="{% url 'plagiarism-check-mainpage' %}">
+              <img
+                src="{% static 'pc/home.jpg' %}"
+                alt="Home!"
+                style="width: 100px; height: 100px"
+              />
+              <span class="sr-only">(current)</span>
+              <span>Home</span></a
+            >
+          </li>
+          <li class="nav-item nav-two">
+            <a class="nav-link" href="{% url 'compare' %}"
+              ><img
+                src="{% static 'pc/file.jpeg' %}"
+                alt="file compare!"
+                style="width: 70px; height: 70px; margin-top: 25px"
+              />
+              <span>Compare Docs</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container content-1">
+      <div class="col-md-8">
+        <h4 style="color:azure; margin-top: 50px; margin-bottom: 30px; font-size: large;margin-left:15px">
+            Plagiarism Checker:
+            <span class="typed2"></span>
+        </h4>
+     
+       
+    </div>
+      <div class="text-content">
+       
+        <div class="row">
+          <div class="col-md-5 tab-content-2">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+              <li class="nav-item">
+                <a
+                  class="nav-link active"
+                  id="text-tab-2"
+                  data-toggle="tab"
+                  href="#text-input-dc-1"
+                  role="tab"
+                  aria-controls="text-input-ws"
+                  aria-selected="true"
+                  >Text</a
+                >
+              </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+              <div
+                class="tab-pane fade show active"
+                id="text-input-dc-1"
+                role="tabpanel"
+                aria-labelledby="text-tab-2"
+              >
+                <form id="form1-ws" action="/twofiletest1/" method="POST">
+                  {% csrf_token %}
+                  <textarea id="text-in-1" name="q1" required></textarea><br />
+                  <textarea id="text-1" name="q2" required></textarea>
+                </form>
+                <button
+                  type="submit"
+                  form="form1-ws"
+                  id="submit-button-1"
+                  class="btn"
+                >
+                  Compare The Texts
+                </button>
+                <ul style="text-align: justify">
+                  <li
+                    class="output-per"
+                    style="
+                      list-style: none;
+                      margin-left: 130px;
+                      margin-top: 20px;
+                    "
+                  >
+                    {{ result }}%
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-5 tab-content-2">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+              <li class="nav-item">
+                <a
+                  class="nav-link active"
+                  id="file-tab-3"
+                  data-toggle="tab"
+                  href="#file-input-dc-2"
+                  role="tab"
+                  aria-controls="file-input-ws"
+                  aria-selected="true"
+                  >File Upload</a
+                >
+              </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+              <div
+                class="tab-pane fade show active"
+                id="file-input-dc-2"
+                role="tabpanel"
+                aria-labelledby="file-tab-3"
+              >
+                <form
+                  id="form2-ws"
+                  action="/twofilecompare1/"
+                  enctype="multipart/form-data"
+                  method="POST"
+                >
+                  {% csrf_token %}
+                  <input
+                    type="file"
+                    class="fileupload"
+                    id="fileupload"
+                    name="docfile1"
+                    required="True"
+                  />
+                  <input
+                    type="file"
+                    class="fileupload"
+                    id="fileupload"
+                    name="docfile2"
+                    required="True"
+                  />
+                </form>
+              </div>
+              <button
+                type="submit"
+                form="form2-ws"
+                id="submit-button-2"
+                class="btn submit-button-2"
+              >
+                Compare The Files
+              </button>
+              <ul style="text-align: justify">
+                <li
+                  class="output-per"
+                  style="list-style: none; margin-left: 130px; margin-top: 20px"
+                >
+                  {{ result2 }}%
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- <div class="row button-align">
+                <button type="submit" form="form1-ws" id="submit-button-1" class="btn">Compare The Texts</button>
+                <button type="submit" form="form2-ws" id="submit-button-2" class="btn submit-button-2">Compare The Files</button>
+            </div> -->
+        <!-- <ul style="text-align: center;margin-left: 450px;">
+                <li class="output-per" style="list-style:none">{{ result }}%</li>
+                <li class="output-per" style="list-style:none">{{ result2 }}%</li>
+            </ul> -->
+      </div>
+    </div>
+<script>
+   var typed = new Typed('.typed2', {
+      strings: ["choose two files to compare", "or enter contents to compare!"],
+      typeSpeed: 30,
+      loop: true,
+      backSpeed: 25,
+      backDelay: 700
+    });
+
+</script>
+   
+  
+  <!-- JQuery -->
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+    ></script>
+    <!-- Bootstrap tooltips -->
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"
+    ></script>
+    <!-- Bootstrap core JavaScript -->
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"
+    ></script>
+    <!-- MDB core JavaScript -->
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"
+    ></script>
+    <script src="{% static 'pc/typed.min.js' %}"></script>
+  </body>
+</html>

@@ -1,0 +1,223 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plagiarism Checker | Home</title>
+  <link rel='icon' href="{% static 'pc/logomain.jpeg' %}">
+
+  <!-- Font Awesome -->
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  <!-- Google Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+
+  <!-- Material Design Bootstrap -->
+
+
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@700&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap core CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+  <link href="{% static '/pc/styles.css' %}" rel="stylesheet" type="text/css">
+  <!-- <script src="{% static 'pc/script.js' %}?v=2"></script>
+  
+  <script src="{% static 'pc/typed.min.js' %}"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+
+  <style>
+    /* body{
+        background-color: #7abecc;
+    } */
+    .navbar-brand {
+      font-size: 40px !important;
+
+    }
+    .greeting-msg{
+      font-size:18px !important;
+  color:aliceblue !important;
+  margin-right:20px !important;
+
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #000000">
+    <a class="navbar-brand" href="{% url 'plagiarism-check-mainpage' %}">
+      <img src="{% static 'pc/logomain.jpeg' %}" alt="Description of the image"
+        style="display: flex; width: 250px; height: 150px" />
+    </a>
+    <button class="navbar-toggler" style="text-decoration: none" type="button" data-toggle="collapse"
+      data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item nav-one">
+          <a class="nav-link" href="{% url 'plagiarism-check-mainpage' %}">
+            <img src="{% static 'pc/home.jpg' %}" alt="Home!" style="width: 100px; height: 100px" />
+            <span class="sr-only">(current)</span>
+            <span>Home</span></a>
+        </li>
+        <li class="nav-item nav-two">
+          <a class="nav-link" href="{% url 'compare' %}"><img src="{% static 'pc/file.jpeg' %}" alt="file compare!"
+              style="width: 70px; height: 70px; margin-top: 25px" />
+            <span>Compare Docs</span>
+          </a>
+        </li>
+       
+      </ul>
+    </div>
+    <span class="greeting-msg">Hello, {{request.user}}</span>
+    <span class="nav-link" ><a class="greeting-msg" href="{% url 'logout' %}">Logout</a></span>
+  </nav>
+
+  <div class="container content-1">
+    <div class="row">
+      <div class="col-md-6">
+        <h4 style="color:azure;margin-bottom: 30px;font-size: large;">
+          Plagiarism Checker: <span class="typed"> </span>
+        </h4>
+        <div class="col-md-12  text-content">
+
+
+
+          <div class="tab-content-1">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" id="text-tab" data-toggle="tab" href="#text-input-ws" role="tab"
+                  aria-controls="text-input-ws" aria-selected="true" onclick="makeInvisible()">Text</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="file-tab" data-toggle="tab" href="#file-input-ws" role="tab"
+                  aria-controls="file-input-ws" aria-selected="false" onclick="makeVisible()">File Upload</a>
+              </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+              <div class="tab-pane fade show active" id="text-input-ws" role="tabpanel" aria-labelledby="text-tab">
+
+                <form id="form1-ws" action="/test/" method="POST">
+                  {% csrf_token %}
+                  <textarea id="text-1" name="q" required onclick="makeInvisible()"></textarea>
+                </form>
+
+              </div>
+
+              <div class="tab-pane fade" id="file-input-ws" role="tabpanel" aria-labelledby="file-tab">
+                <form id="form2-ws" action="/filetest/" enctype="multipart/form-data" method="POST">
+                  {% csrf_token %}
+                  <input id="id_docfile" required type="file" name="docfile" />
+                </form>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-md-12">
+          <button type="submit" form="form1-ws" id="submit-button-1" class="btn">Run Search</button>
+          <button type="submit" form="form2-ws" id="submit-button-2" class="btn submit-button-2">Run Search</button>  
+        </div>
+
+
+      </div>
+      <div class="col-md-6">
+        <div class=" container " style="overflow:auto">
+
+
+
+          <div class="container-fluid result-div">
+            <div class="row">
+              <div class="col-md-12 result-1">
+                <h3>Results</h3>
+                <ul class="output-list-1">
+                  {% for links in link %}
+                  <li>{{ links }}</li>
+                  {% endfor %}
+              </div>
+
+              <div class="row" style="overflow:auto;">
+                <div class="col-md-8 result-2">
+                  <p class=" output-per-tot">{{ percent }}%</p>
+
+                </div>
+
+
+
+
+
+
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-11 " style="text-align:center;margin-top:5px" >
+            <p style="font-size:18px;color: azure;">Plagiarized</p>
+           
+          </div>
+        </div>
+      </div>
+
+
+
+
+    </div>
+  </div>
+
+
+
+
+
+
+  <script>
+   
+    function makeVisible() {
+      document.getElementById("submit-button-2").style.visibility = "visible";
+      document.getElementById("submit-button-1").style.visibility = "hidden";
+    }
+
+    function makeInvisible(){
+      document.getElementById("submit-button-2").style.visibility = "hidden";
+      document.getElementById("submit-button-1").style.visibility = "visible";
+    }
+
+    // Initialize Typed.js
+    var typed = new Typed('.typed', {
+      strings: ["a file", "enter text", "upload a .txt file"],
+      typeSpeed: 30,
+      loop: true,
+      backSpeed: 25,
+      backDelay: 700
+    });
+
+  </script>
+
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+  <!-- JQuery -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+
+  <!-- <script src="{% static 'pc/script.js' %}?v=2"></script> -->
+  <script src="{% static 'pc/typed.min.js' %}"></script>
+
+</body>
+
+</html>
